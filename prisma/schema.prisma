@@ -29,11 +29,14 @@ model Page {
   historyHeadId String? @db.VarChar(191)
   redoHeadId    String? @db.VarChar(191)
 
-  // Relations
-  site   Site?   @relation(fields: [siteId], references: [id])
-  siteId String?
+  // Timestamps (fixes the Vercel error)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  edits Edit[] @relation("PageEdits")
+  // Relations
+  edits  Edit[]  @relation("PageEdits")
+  site   Site?   @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  siteId String?
 }
 
 model Edit {
