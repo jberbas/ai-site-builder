@@ -1,0 +1,49 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ---------- Models ----------
+
+model Site {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  pages Page[]
+}
+
+model Page {
+  id     String @id @default(cuid())
+  title  String
+  blocks Json
+
+  // Undo/Redo heads
+  historyHeadId String? @db.VarChar(191)
+  redoHeadId    String? @db.VarChar(191)
+
+  // Relations
+  site   Site?   @relation(fields: [siteId], references: [id])
+  siteId String?
+
+  edits Edit[] @relation("PageEdits")
+}
+
+model Edit {
+  id         String   @id @default(cuid())
+  pageId     String
+  page       Page     @relation("PageEdits", fields: [pageId], references: [id], onDelete: Cascade)
+  prevEditId String?  @db.VarChar(191)
+  before     Json
+  after      Json
+  createdAt  DateTime @default(now())
+
+  @@index([pageId, createdAt])
+}

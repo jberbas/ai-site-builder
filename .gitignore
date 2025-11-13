@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Logs
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Env files
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+.env.local.bak
+
+# Vercel
+.vercel/
+
+# OS/editor junk
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
