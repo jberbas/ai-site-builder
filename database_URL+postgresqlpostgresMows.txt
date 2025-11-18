@@ -1,1 +1,0 @@
-database_URL=postgresql://postgres:Mowser88$$!@db.qdrmkdjaddiasyhnftwm.supabase.co:5432/postgres

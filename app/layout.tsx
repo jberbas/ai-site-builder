@@ -1,9 +1,19 @@
-export const metadata = { title: "AI Site Builder", description: "Conversational website editor" };
+// app/layout.tsx
+import "./globals.css";
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export const metadata: Metadata = {
+  title: "Nebula Sites – AI Website Studio",
+  description: "AI-powered website builder with live editor and undo/redo.",
+};
+
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body style={{ fontFamily: "system-ui, sans-serif", margin: 0 }}>{children}</body>
+      <body className="min-h-screen bg-slate-950 text-slate-50 antialiased">
+        {children}
+      </body>
     </html>
   );
 }
